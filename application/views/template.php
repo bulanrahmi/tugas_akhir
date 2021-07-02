@@ -26,7 +26,10 @@
 	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
 	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.min.css" integrity="sha512-kq3FES+RuuGoBW3a9R2ELYKRywUEQv0wvPTItv3DSGqjpbNtGWVdvT8qwdKkqvPzT93jp8tSF4+oN4IeTEIlQA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet"
+		  href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.min.css"
+		  integrity="sha512-kq3FES+RuuGoBW3a9R2ELYKRywUEQv0wvPTItv3DSGqjpbNtGWVdvT8qwdKkqvPzT93jp8tSF4+oN4IeTEIlQA=="
+		  crossorigin="anonymous" referrerpolicy="no-referrer"/>
 </head>
 
 <body id="mimin" class="dashboard">
@@ -111,11 +114,16 @@
 					<li class="ripple"><a href="<?php echo site_url('Jenis_berobat') ?>"><span
 									class="fa fa-pencil-square-o"></span>Jenis Berobat</a></li>
 
+					<li class="ripple"><a href="<?php echo site_url('Pendaftaran/pasien') ?>"><span
+									class="fa fa-user icon-sign-out"></span>Pasien</a></li>
+					<li class="ripple"><a href="<?php echo site_url('Pendaftaran') ?>"><span
+									class="fa fa-user icon-sign-out"></span>Pendaftaran</a></li>
 				<?php endif; ?>
-				<li class="ripple"><a href="<?php echo site_url('Pendaftaran') ?>"><span
-								class="fa fa-user icon-sign-out"></span>Pendaftaran</a></li>
-				<li class="ripple"><a href="<?php echo site_url('Pendaftaran/pasien') ?>"><span
-								class="fa fa-user icon-sign-out"></span>Pasien</a></li>
+				<?php if ($this->session->userdata('level') == 'user') : ?>
+					<li class="ripple"><a href="<?php echo site_url('Pendaftaran/kunjungan') ?>"><span
+									class="fa fa-user icon-sign-out"></span>Pendaftaran Kunjungan</a></li>
+				<?php endif; ?>
+
 				<li class="ripple"><a href="<?php echo site_url('Auth/Logout') ?>"><span
 								class=" fa fa-sign-out icon-sign-out"></span>Logout</a></li>
 			</ul>

@@ -73,13 +73,34 @@ class Pendaftaran extends CI_Controller
 		$this->template->load('template', 'pendaftaran/list-pasien', $data);
 	}
 
+	public function kunjungan()
+	{
+		$id_user = $this->session->userdata('id');
+		$data['daftar'] = $this->db->query("
+                select tp.id, ps.nama_pasien, tp.tanggal_daftar, tp.keterangan, jb.jenis_pasien from tbl_transaksi_pasien as tp, tbl_pasien as ps, jenis_berobat as jb
+                where tp.id_user=ps.id_user and tp.id_jenis_berobat=jb.id and tp.id_user=$id_user
+                ")->result();
+		$data['pasien'] = $this->db->query("select * from tbl_pasien")->result();
+		$this->template->load('template', 'pendaftaran/kunjungan-pasien', $data);
+	}
+
+
 	function add()
 	{
+		$level = $this->session->userdata('level');
 		if (isset($_POST['submit'])) {
 			$this->Model_pendaftaran->add();
-			redirect('Pendaftaran');
+			if ($level == 'admin') {
+				redirect('Pendaftaran');
+			} else {
+				redirect('Pendaftaran/kunjungan');
+			}
 		} else {
-			$this->template->load('template', 'pendaftaran/list');
+			if ($level == 'admin') {
+				$this->template->load('template', 'pendaftaran/list');
+			} else {
+				$this->template->load('template', 'pendaftaran/kunjungan-pasien');
+			}
 		}
 	}
 
